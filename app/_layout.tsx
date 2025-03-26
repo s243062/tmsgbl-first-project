@@ -1,9 +1,23 @@
-import { Ionicons } from "@expo/vector-icons"; // Make sure to install expo/vector-icons if not already installed
+import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 export default function AppLayout() {
   return (
     <Tabs>
+      <Tabs.Screen
+        name="mila_playground"
+        options={{
+          title: "Playground",
+          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="progress"
+        options={{
+          title: "Progress",
+          tabBarIcon: ({ color }) => <Ionicons name="trending-up" size={24} color={color} />,
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
@@ -12,10 +26,10 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="mila_playground"
+        name="gardener_overview"
         options={{
-          title: "Mila Playground",
-          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
+          title: "Gardener",
+          tabBarIcon: ({ color }) => <Ionicons name="leaf" size={24} color={color} />,
         }}
       />
     </Tabs>
