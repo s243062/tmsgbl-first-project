@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "sprouty",
+    "slug": "sprouty",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tmsgblorg.sprouty"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.tmsgblorg.sprouty"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "659fc88d-7287-4c51-a577-722ac7eb7f4f"
+      }
+    },
+    "owner": "tmsgbl-org",
+    "updates": {
+      "url": "https://u.expo.dev/659fc88d-7287-4c51-a577-722ac7eb7f4f"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
+  }
+}
