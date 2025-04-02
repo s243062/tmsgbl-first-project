@@ -1,13 +1,9 @@
-
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import dataSteps from '../assets/dataSteps.json';
+import sleepData from '../assets/sleepDataNew.json';
 
 export default function VegaLiteInteractiveChart() {
-  const [timeUnit, setTimeUnit] = useState('month');
-
   const screenWidth = Dimensions.get('window').width;
 
   const chartHtml = `
@@ -61,14 +57,13 @@ export default function VegaLiteInteractiveChart() {
             Date
           </label>
           <label>
-            <input type="radio" name="timeUnit" value="week" />
+            <input type="radio" name="timeUnit" value="yearweek" />
             Week
           </label>
           <label>
-            <input type="radio" name="timeUnit" value="month" checked />
+            <input type="radio" name="timeUnit" value="yearmonth" checked />
             Month
           </label>
-          
           <label>
             <input type="radio" name="timeUnit" value="year" />
             Year
@@ -77,10 +72,19 @@ export default function VegaLiteInteractiveChart() {
       </div>
       <div id="vis"></div>
       <script>
-        const data = ${JSON.stringify(dataSteps)};
-
+        const data = ${JSON.stringify(sleepData)};
+        
         // Function to create and render the chart
         function renderChart(timeUnit) {
+          const timeUnitDisplayMap = {
+            'yeardatemonth': 'Date',
+            'yearweek': 'Week',
+            'yearmonth': 'Month',
+            'year': 'Year'
+          };
+          
+          const displayName = timeUnitDisplayMap[timeUnit] || timeUnit;
+          
           const spec = {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "data": { "values": data },
@@ -95,23 +99,23 @@ export default function VegaLiteInteractiveChart() {
                 "field": "Date",
                 "type": "temporal",
                 "timeUnit": timeUnit,
-                "title": timeUnit === 'yearmonth' ? '6 Months' : timeUnit.charAt(0).toUpperCase() + timeUnit.slice(1)
+                "title": displayName
               },
               "y": {
-                "field": "Steps",
+                "field": "sleepHours",
                 "type": "quantitative",
                 "aggregate": "sum",
-                "title": "Total Steps"
+                "title": "Hours Slept"
               },
               "tooltip": [
-                { "field": "Date", "type": "temporal" },
-                { "field": "Steps", "type": "quantitative", "aggregate": "sum" }
+                { "field": "Date", "type": "temporal", "timeUnit": timeUnit },
+                { "field": "sleepHours", "type": "quantitative", "aggregate": "sum", "title": "Sleep Hours" }
               ]
             },
             "width": "container",
             "height": 300,
             "title": {
-              "text": \`Total Steps per \${timeUnit === 'yearmonth' ? '6 Months' : timeUnit.charAt(0).toUpperCase() + timeUnit.slice(1)}\`,
+              "text": "Total Hours Slept per " + displayName,
               "fontSize": 18,
               "font": "Arial",
               "color": "#333"
@@ -124,7 +128,7 @@ export default function VegaLiteInteractiveChart() {
         }
 
         // Initial render
-        renderChart('month');
+        renderChart('yearmonth');
 
         // Add event listeners to radio buttons
         document.querySelectorAll('input[name="timeUnit"]').forEach(radio => {
@@ -147,6 +151,8 @@ export default function VegaLiteInteractiveChart() {
         domStorageEnabled={true}
         startInLoadingState={true}
         scalesPageToFit={true}
+        onError={(e) => console.error('WebView error:', e.nativeEvent)}
+        onHttpError={(e) => console.error('WebView HTTP error:', e.nativeEvent)}
       />
     </View>
   );
