@@ -1,46 +1,6 @@
-// import VegaChart from '@/components/VegaLiteChart';
-// import VegaChartScreen from '@/components/VegaLiteChart_ScreenTime';
-// import VegaChartSleep from '@/components/VegaLiteChart_Sleep';
-// import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
 
-// export default function MilaPlayground() {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.text}>Welcome to Mila Playground!</Text>
 
-//       {/* Vega-Lite Chart */}
-//       <VegaChart />
-//       <VegaChartSleep />
 
-//     </View>
-//     {/* Separate container for Screen Time Chart */}
-//     <View style={styles.screenTimeContainer}>
-//     <Text style={styles.screenTimeTitle}>Screen Time Chart</Text>
-//     <VegaChartScreen />
-//   </View>
-// </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#f8f8f8',
-//   },
-//   text: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     color: '#333',
-//     marginBottom: 20, // Optional: adds some space between text and chart
-//   },
-// });
-
-import VegaChart from "@/components/VegaLiteChart";
-import VegaChartScreen from "@/components/VegaLiteChart_ScreenTime";
-import VegaChartSleep from "@/components/VegaLiteChart_Sleep";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -51,16 +11,10 @@ export default function MilaPlayground() {
 
             {/* Vega-Lite Charts (General Charts) */}
             <View style={styles.chartContainer}>
-                <VegaChart />
-                <VegaChartSleep />
-                <VegaChartScreen />
+                
             </View>
 
-            {/* Separate container for Screen Time Chart
-      <View style={styles.screenTimeContainer}>
-        <Text style={styles.screenTimeTitle}>Screen Time Chart</Text>
-        <VegaChartScreen />
-      </View> */}
+          
         </View>
     );
 }

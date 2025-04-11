@@ -5,9 +5,17 @@ export default function AppLayout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>  {/* This hides headers for ALL tabs */}
     <Tabs.Screen
-        name="mila_playground"
+        name="steps"
         options={{
-          title: "Playground",
+          title: "Steps",
+          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
+          // If you want to keep the header for this screen, add: headerShown: true
+        }}
+      />
+       <Tabs.Screen
+        name="sleep"
+        options={{
+          title: "Sleep",
           tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
           // If you want to keep the header for this screen, add: headerShown: true
         }}
