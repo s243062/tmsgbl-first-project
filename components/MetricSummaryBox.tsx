@@ -16,16 +16,16 @@ type ActivityIcons = {
 };
 const activityIcons: Record<string, ActivityIcons> = {
     steps: {
-        activityIcon: require("..\\assets\\images\\stepsIcon.png"),
-        chartIcon: require("..\\assets\\images\\stepsChartIcon.png"),
+        activityIcon: require("../assets/images/stepsIcon.png"),
+        chartIcon: require("../assets/images/stepsChartIcon.png"),
     },
     sleep: {
-        activityIcon: require("..\\assets\\images\\sleepIcon.png"),
-        chartIcon: require("..\\assets\\images\\sleepChartIcon.png"),
+        activityIcon: require("../assets/images/sleepIcon.png"),
+        chartIcon: require("../assets/images/sleepChartIcon.png"),
     },
     screenTime: {
-        activityIcon: require("..\\assets\\images\\screenTimeIcon.png"),
-        chartIcon: require("..\\assets\\images\\screenChartIcon.png"),
+        activityIcon: require("../assets/images/screenTimeIcon.png"),
+        chartIcon: require("../assets/images/screenChartIcon.png"),
     },
 };
 
