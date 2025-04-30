@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import sleepData from '../assets/dataSleep.json'; // Your sleep data
+import dataSteps from '../assets/dataSteps.json';
 
 export default function VegaLiteInteractiveChart() {
   const screenWidth = Dimensions.get('window').width;
@@ -58,101 +58,93 @@ export default function VegaLiteInteractiveChart() {
       <div id="chart" class="chart-container"></div>
 
       <script>
-        const sleepData = ${JSON.stringify(sleepData)};
+        const dataSteps = ${JSON.stringify(dataSteps)};
         const rangeRadios = document.querySelectorAll('input[name="range"]');
         rangeRadios.forEach(r => r.addEventListener('change', renderChart));
 
         function renderChart() {
           const range = document.querySelector('input[name="range"]:checked').value;
-          let latestDate, startDate, periodText, binFunc, binLabelFunc;
+          const latestDate = new Date(Math.max(...dataSteps.map(d => new Date(d.Date))));
+          const startDate = new Date(latestDate);
+          let periodText, binFunc, binLabelFunc;
+          // Define goal line value based on time selection
           let goalValue;
           let goalLabel;
-          let filteredData;
           
           if (range === "Week") {
-            // For weekly view only - Use April 30, 2025 (Wednesday) as reference
-            latestDate = new Date(2025, 3, 30); // Fixed date for Wednesday, April 30, 2025
-            
-            // Calculate the Monday of the current week
-            startDate = new Date(latestDate);
+            // For weekly view, always show full week (Mon-Sun)
             const dayOfWeek = latestDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-            startDate.setDate(latestDate.getDate() - ((dayOfWeek + 6) % 7)); // Go back to Monday
+            const endOfWeek = new Date(latestDate);
             
+            if (dayOfWeek === 0) {
+              // If it's Sunday, we're already at the end of the week
+              // No adjustment needed
+            } else {
+              // Otherwise, adjust to the next Sunday
+              endOfWeek.setDate(latestDate.getDate() + (7 - dayOfWeek));
+            }
+            
+            startDate.setDate(endOfWeek.getDate() - 6); // Go back 6 days from Sunday to get Monday
             periodText = "Week";
             binFunc = date => date.toDateString();
             binLabelFunc = bin => {
               const d = new Date(bin);
               return d.toLocaleDateString('en-US', { weekday: 'short' });
             };
-            goalValue = 8; // Daily goal
+            goalValue = 10000; // Daily goal
             goalLabel = "Daily Goal";
-            
-            // Use only Mon, Tue, Wed data for weekly view
-            const weekData = [
-              { Date: "2025-04-28", sleepHours: 7 },  // Monday
-              { Date: "2025-04-29", sleepHours: 6.5 }, // Tuesday 
-              { Date: "2025-04-30", sleepHours: 8 }   // Wednesday (today)
-            ];
-            filteredData = weekData;
-          } else {
-            // For all other views, use the original code unchanged
-            latestDate = new Date(Math.max(...sleepData.map(d => new Date(d.Date))));
-            startDate = new Date(latestDate);
-            
-            if (range === "Month") {
-              startDate.setDate(latestDate.getDate() - 29);
-              periodText = "Month";
-              binFunc = date => date.toDateString();
-              binLabelFunc = bin => {
-                const d = new Date(bin);
-                return \`\${d.getDate()} \${d.toLocaleDateString('en-US', { month: 'short' })}\`;
-              };
-              goalValue = 8; // Daily goal
-              goalLabel = "Daily Goal";
-            } else if (range === "6 Months") {
-              startDate.setMonth(latestDate.getMonth() - 5);
-              startDate.setDate(1); // beginning of month
-              periodText = "6 Months";
-              binFunc = date => {
-                const d = new Date(date);
-                d.setDate(d.getDate() - d.getDay()); // start of week (Sunday)
-                return d.toISOString().split('T')[0];
-              };
-              binLabelFunc = bin => {
-                const d = new Date(bin);
-                return \`\${d.toLocaleDateString('en-US', { month: 'short' })} W\${Math.ceil(d.getDate() / 7)}\`;
-              };
-              goalValue = 56; // Weekly goal (7 * 8)
-              goalLabel = "Weekly Goal";
-            } else if (range === "1 Year") {
-              startDate.setFullYear(latestDate.getFullYear() - 1);
-              startDate.setDate(1);
-              periodText = "1 Year";
-              binFunc = date => {
-                const d = new Date(date);
-                return \`\${d.getFullYear()}-\${String(d.getMonth() + 1).padStart(2, '0')}\`;
-              };
-              binLabelFunc = bin => {
-                const [year, month] = bin.split('-');
-                const d = new Date(parseInt(year), parseInt(month) - 1, 1);
-                return d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
-              };
-              goalValue = 240; // Monthly goal (30 * 8)
-              goalLabel = "Monthly Goal";
-            }
-            
-            // Use original filtering for other views
-            filteredData = sleepData.filter(d => {
-              const currentDate = new Date(d.Date);
-              return currentDate >= startDate && currentDate <= latestDate;
-            });
+          } else if (range === "Month") {
+            startDate.setDate(latestDate.getDate() - 29);
+            periodText = "Month";
+            binFunc = date => date.toDateString();
+            binLabelFunc = bin => {
+              const d = new Date(bin);
+              return \`\${d.getDate()} \${d.toLocaleDateString('en-US', { month: 'short' })}\`;
+            };
+            goalValue = 10000; // Daily goal
+            goalLabel = "Daily Goal";
+          } else if (range === "6 Months") {
+            startDate.setMonth(latestDate.getMonth() - 5);
+            startDate.setDate(1); // beginning of month
+            periodText = "6 Months";
+            binFunc = date => {
+              const d = new Date(date);
+              d.setDate(d.getDate() - d.getDay()); // start of week (Sunday)
+              return d.toISOString().split('T')[0];
+            };
+            binLabelFunc = bin => {
+              const d = new Date(bin);
+              return \`\${d.toLocaleDateString('en-US', { month: 'short' })} W\${Math.ceil(d.getDate() / 7)}\`;
+            };
+            goalValue = 70000; // Weekly goal (7 * 10000)
+            goalLabel = "Weekly Goal";
+          } else if (range === "1 Year") {
+            startDate.setFullYear(latestDate.getFullYear() - 1);
+            startDate.setDate(1);
+            periodText = "1 Year";
+            binFunc = date => {
+              const d = new Date(date);
+              return \`\${d.getFullYear()}-\${String(d.getMonth() + 1).padStart(2, '0')}\`;
+            };
+            binLabelFunc = bin => {
+              const [year, month] = bin.split('-');
+              const d = new Date(parseInt(year), parseInt(month) - 1, 1);
+              return d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+            };
+            goalValue = 300000; // Monthly goal (30 * 10000)
+            goalLabel = "Monthly Goal";
           }
+          
+          const filteredData = dataSteps.filter(d => {
+            const currentDate = new Date(d.Date);
+            return currentDate >= startDate && currentDate <= latestDate;
+          });
           
           // Group data by bin
           const binned = {};
           filteredData.forEach(d => {
             const bin = binFunc(new Date(d.Date));
-            binned[bin] = (binned[bin] || 0) + d.sleepHours;
+            binned[bin] = (binned[bin] || 0) + d.Steps;
           });
           
           // For weekly view, ensure all 7 days of the week are shown even if no data
@@ -168,10 +160,10 @@ export default function VegaLiteInteractiveChart() {
           }
           
           // Convert to array for visualization with improved labels
-          let grouped = Object.entries(binned).map(([bin, sleepHours]) => ({
+          let grouped = Object.entries(binned).map(([bin, Steps]) => ({
             Bin: bin,
             BinLabel: binLabelFunc(bin), // This is what will show on the x-axis
-            sleepHours,
+            Steps,
             // Store date info for sorting
             _origBin: bin
           }));
@@ -193,30 +185,34 @@ export default function VegaLiteInteractiveChart() {
           });
           
           // Remove the temporary field and use BinLabel as the Bin for display
-          const chartData = grouped.map(({BinLabel, sleepHours}) => ({
+          const chartData = grouped.map(({BinLabel, Steps}) => ({
             Bin: BinLabel, 
-            sleepHours
+            Steps
           }));
           
           // Single data point for the goal line with a legend field
           const goalData = [{value: goalValue, Legend: goalLabel}];
           
-          // Recalculate daily average
-          const totalSleep = filteredData.reduce((sum, d) => sum + d.sleepHours, 0);
-          const uniqueDates = new Set(filteredData.map(d => (new Date(d.Date)).toDateString()));
-          const avg = uniqueDates.size > 0 ? totalSleep / uniqueDates.size : 0;
-          
+          // For weekly view, add a "Today" indicator for Wednesday
+          let todayData = [];
           if (range === "Week") {
-            // For weekly view, show more precise average
-            document.getElementById("averageLabel").textContent = \`Average per Day: 7 hours 12 minutes\`;
-          } else {
-            // Keep original format for other views
-            document.getElementById("averageLabel").textContent = \`Average per Day: \${Math.round(avg).toLocaleString()} hours\`;
+            // Find the Wednesday bin
+            const wednesdayDate = new Date(startDate);
+            // Start from Monday (startDate) and add 2 days to get to Wednesday
+            wednesdayDate.setDate(startDate.getDate() + 2);
+            const wednesdayBin = binLabelFunc(wednesdayDate.toDateString());
+            todayData = [{Today: wednesdayBin, Legend: "Current Day"}];
           }
           
+          // Recalculate daily average
+          const totalSteps = filteredData.reduce((sum, d) => sum + d.Steps, 0);
+          const uniqueDates = new Set(filteredData.map(d => (new Date(d.Date)).toDateString()));
+          const avg = uniqueDates.size > 0 ? totalSteps / uniqueDates.size : 0;
+          document.getElementById("averageLabel").textContent = \`Average per Day: \${Math.round(avg).toLocaleString()} steps\`;
+          
           // Determine a good y-axis scale that includes both the data and goal
-          const maxSleep = Math.max(...chartData.map(d => d.sleepHours));
-          const yDomainMax = Math.max(maxSleep, goalValue) * 1.1;
+          const maxSteps = Math.max(...chartData.map(d => d.Steps));
+          const yDomainMax = Math.max(maxSteps, goalValue) * 1.1;
           
           // Create Vega-Lite specification
           const spec = {
@@ -236,15 +232,15 @@ export default function VegaLiteInteractiveChart() {
                     "axis": {
                       "labelAngle": range === "Week" ? 0 : 90,
                       "title": null,
-                      "labelExpr": range === "Week" ? "datum.value === 'Wed' ? '-->' + datum.label + '<--' : datum.label" : undefined
+                      "labelExpr": range === "Week" ? "datum.value === 'Wed' ? '-->' + datum.label + '<--' : datum.label" : undefined,
+
                     }
                   },
                   "y": { 
-                    "field": "sleepHours", 
+                    "field": "Steps", 
                     "type": "quantitative",
                     "scale": { "domain": [0, yDomainMax], "nice": true },
-                    "axis": { "grid": false, "tickCount": 3 },
-                    "title": "Sleep Hours"
+                    "axis": { "grid": false, "tickCount": 3 }
                   }
                 }
               },

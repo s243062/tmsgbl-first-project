@@ -1,4 +1,6 @@
-import VegaLiteStepsMain from '@/components/StepsChartFinal';
+
+import VegaLiteScreenTime from '@/components/ScreenTimeChart';
+
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -13,7 +15,7 @@ export default function StepsView() {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Image source={require('@/assets/images/back-arrow.png')} style={styles.backIcon} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Steps</Text>
+        <Text style={styles.headerTitle}>Screen Time</Text>
       </View>
 
       <ScrollView 
@@ -21,10 +23,9 @@ export default function StepsView() {
         showsVerticalScrollIndicator={false}
       >
         <View style={[styles.chartWrapper, { width: screenWidth - 24 }]}>
-          <VegaLiteStepsMain />
+          <VegaLiteScreenTime />
         </View>
 
-        
       </ScrollView>
     </View>
   );

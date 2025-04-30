@@ -20,6 +20,14 @@ export default function AppLayout() {
           // If you want to keep the header for this screen, add: headerShown: true
         }}
       />
+      <Tabs.Screen
+        name="screenTime"
+        options={{
+          title: "Screen Time",
+          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
+          // If you want to keep the header for this screen, add: headerShown: true
+        }}
+      />
     <Tabs.Screen
         name="progress"
         options={{
