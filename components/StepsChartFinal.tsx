@@ -289,12 +289,18 @@ export default function VegaLiteInteractiveChart() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    //paddingTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   webview: {
-    borderRadius: 12,
+    //borderRadius: 12,
     overflow: 'hidden',
-  }
+  },
+  reportTitle: {
+    fontSize: 18,
+    fontWeight: 500,
+    color: '#333',
+    marginBottom: 12,
+  },
 });
