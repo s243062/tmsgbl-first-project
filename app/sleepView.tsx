@@ -30,14 +30,12 @@ export default function SleepView() {
         <View style={[styles.reportCard, { width: screenWidth - 24 }]}>
           <Text style={styles.reportTitle}>Weekly Report</Text>
           
-          <View style={styles.averageContainer}>
-            <Text style={styles.currentAverageLabel}>Current Week's Average:</Text>
-            <Text style={styles.currentAverageValue}>7 hrs 12 min</Text>
-          </View>
           
           <Text style={styles.previousAverageText}>Previous Week's Average: 6 hrs 30 min</Text>
           
           <View style={styles.percentChangeContainer}>
+          <Text style={styles.percentChangeText}>Current Week: </Text>
+
             <Image 
               source={require('@/assets/images/GreenUpArrow.png')} 
               style={styles.arrowIcon} 
@@ -118,10 +116,10 @@ const styles = StyleSheet.create({
     color: '#4CAF50', // Green color for positive change
   },
   chartWrapper: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 12,
-    marginBottom: 20,
+    //backgroundColor: '#fff',
+    //borderRadius: 16,
+    //padding: 12,
+    //marginBottom: 20,
     shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowRadius: 8,

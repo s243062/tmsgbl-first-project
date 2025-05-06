@@ -21,7 +21,8 @@ export default function VegaLiteInteractiveChart() {
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
           background: #fff;
-          padding: 12px;
+          margin-left: 12px;
+          margin-right: 12px;
         }
         .radio-group {
           display: flex;
@@ -38,14 +39,18 @@ export default function VegaLiteInteractiveChart() {
           overflow-x: auto;
         }
         p.average-label {
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-top: 0.5em;
-          margin-bottom: 12px;
+          font-size: 0.95em;
+          font-weight: 420;
+          color: #717171;
+        }
+        p.title-label {
+          font-size: 1.01em;
+          font-weight: 500;
         }
       </style>
     </head>
     <body>
+      <p class="title-label" id="titleLabel"></p>
       <p class="average-label" id="averageLabel"></p>
       <div class="radio-group">
         ${['Week', 'Month', '6 Months', '1 Year'].map(range => `
@@ -209,6 +214,8 @@ export default function VegaLiteInteractiveChart() {
           const uniqueDates = new Set(filteredData.map(d => (new Date(d.Date)).toDateString()));
           const avg = uniqueDates.size > 0 ? totalSteps / uniqueDates.size : 0;
           document.getElementById("averageLabel").textContent = \`Average per Day: \${Math.round(avg).toLocaleString()} steps\`;
+          document.getElementById("titleLabel").textContent = \`Steps Count Overview\`;
+
           
           // Determine a good y-axis scale that includes both the data and goal
           const maxSteps = Math.max(...chartData.map(d => d.Steps));
@@ -294,7 +301,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   webview: {
-    //borderRadius: 12,
+    borderRadius: 12,
     overflow: 'hidden',
   },
   reportTitle: {

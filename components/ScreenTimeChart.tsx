@@ -20,21 +20,26 @@ export default function VegaLiteInteractiveChart() {
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
           background: #fff;
-          padding: 12px;
+          margin-left: 12px;
+          margin-right: 12px;
         }
         .chart-container {
           width: 100%;
           overflow-x: auto;
         }
         p.average-label {
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-top: 0.5em;
-          margin-bottom: 12px;
+          font-size: 0.95em;
+          font-weight: 420;
+          color: #717171;
+        }
+        p.title-label {
+          font-size: 1.01em;
+          font-weight: 500;
         }
       </style>
     </head>
     <body>
+      <p class="title-label" id="titleLabel"></p>
       <p class="average-label" id="averageLabel"></p>
       <div id="chart" class="chart-container"></div>
 
@@ -83,6 +88,7 @@ export default function VegaLiteInteractiveChart() {
           const daysWithData = fullWeek.filter(d => d.minutes > 0).length;
           const avgMinutes = daysWithData > 0 ? totalMinutes / daysWithData : 0;
           
+          document.getElementById("titleLabel").textContent = \`Screen Time Overview\`;
           // Update the average label
           document.getElementById("averageLabel").textContent = 
             \`Average per Day: \${Math.round(avgMinutes)} minutes\`;
@@ -166,7 +172,7 @@ export default function VegaLiteInteractiveChart() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    //paddingTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },

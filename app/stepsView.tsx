@@ -28,16 +28,12 @@ export default function StepsView() {
       >
         {/* Weekly Report Component */}
         <View style={[styles.reportCard, { width: screenWidth - 24 }]}>
-          <Text style={styles.reportTitle}>Weekly Report</Text>
-          
-          <View style={styles.averageContainer}>
-            <Text style={styles.currentAverageLabel}>Current Week's Average:</Text>
-            <Text style={styles.currentAverageValue}>5,691</Text>
-          </View>
+          <Text style={styles.reportTitle}>Weekly Trend</Text>
           
           <Text style={styles.previousAverageText}>Previous Week's Average: 7,113</Text>
           
           <View style={styles.percentChangeContainer}>
+          <Text style={styles.percentChangeText}>Current Week: </Text>
             <Image 
               source={require('@/assets/images/RedDownArrow.png')} 
               style={styles.arrowIcon} 
@@ -118,10 +114,10 @@ const styles = StyleSheet.create({
     color: '#e74c3c',
   },
   chartWrapper: {
-    backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     borderRadius: 16,
-    padding: 12,
-    marginBottom: 20,
+    //padding: 12,
+    //marginBottom: 20,
     shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowRadius: 8,

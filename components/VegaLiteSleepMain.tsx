@@ -18,10 +18,11 @@ export default function VegaLiteInteractiveChart() {
       <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
       <style>
         body {
-          margin: 0;
+          
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
           background: #fff;
-          padding: 12px;
+          margin-left: 12px;
+          margin-right: 12px;
         }
         .radio-group {
           display: flex;
@@ -38,14 +39,18 @@ export default function VegaLiteInteractiveChart() {
           overflow-x: auto;
         }
         p.average-label {
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-top: 0.5em;
-          margin-bottom: 12px;
+          font-size: 0.95em;
+          font-weight: 420;
+          color: #717171;
+        }
+        p.title-label {
+          font-size: 1.01em;
+          font-weight: 500;
         }
       </style>
     </head>
     <body>
+      <p class="title-label" id="titleLabel"></p>
       <p class="average-label" id="averageLabel"></p>
       <div class="radio-group">
         ${['Week', 'Month', '6 Months', '1 Year'].map(range => `
@@ -205,7 +210,7 @@ export default function VegaLiteInteractiveChart() {
           const totalSleep = filteredData.reduce((sum, d) => sum + d.sleepHours, 0);
           const uniqueDates = new Set(filteredData.map(d => (new Date(d.Date)).toDateString()));
           const avg = uniqueDates.size > 0 ? totalSleep / uniqueDates.size : 0;
-          
+          document.getElementById("titleLabel").textContent = \`Sleep Time Overview\`;
           if (range === "Week") {
             // For weekly view, show more precise average
             document.getElementById("averageLabel").textContent = \`Average per Day: 7 hours 12 minutes\`;
@@ -293,7 +298,7 @@ export default function VegaLiteInteractiveChart() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    //paddingTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
