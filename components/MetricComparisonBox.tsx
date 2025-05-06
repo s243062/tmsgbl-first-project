@@ -1,22 +1,46 @@
-import { Image, Text, TouchableHighlight, View } from "react-native";
+import { useRouter } from "expo-router";
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    View,
+} from "react-native";
 
+type ValidRoute =
+    | "/stepsView"
+    | "/sleepView"
+    | "/screenTimeView"
+    | "/sproutyView";
 interface MetricComparisonBoxProps {
     bgColor?: string;
     activityColor?: string;
     comparisonsName: string;
+    navigateTo?: ValidRoute;
 }
 
 export default function MetricComparisonBox({
     bgColor = "#E3F4EE",
     activityColor = "#16A150",
     comparisonsName,
+    navigateTo,
 }: MetricComparisonBoxProps) {
+    const router = useRouter();
+
+    const handlePress = () => {
+        if (navigateTo) {
+            // This works now because `navigateTo` is typed as `ValidRoute`
+            router.push(navigateTo); // Expo Router will now accept this type safely
+        }
+    };
+
     const rightArrowIcon = require("../assets/images/arrowRightIcon.png");
-    const comparisonIcon = require("../assets/images/comparisonIcon.png");
-    const comparisonChartMini = require("../assets/images/comparisonChartMini.png");
+    const sproutyIconY = require("../assets/images/sproutyIconY.png");
+    const sproutyChartMini = require("../assets/images/sproutyChartMini.png");
 
     return (
         <TouchableHighlight
+            onPress={handlePress}
             style={{
                 width: "100%",
                 height: 143,
@@ -57,7 +81,7 @@ export default function MetricComparisonBox({
                         }}
                     >
                         <Image
-                            source={comparisonIcon}
+                            source={sproutyIconY}
                             style={[
                                 {
                                     width: 25,
@@ -84,15 +108,16 @@ export default function MetricComparisonBox({
                         style={{
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "center",
+                            justifyContent: "flex-start",
+                            paddingTop: 5,
                         }}
                     >
                         <Image
                             source={rightArrowIcon}
                             style={[
                                 {
-                                    width: 14,
-                                    height: 14,
+                                    width: 16,
+                                    height: 16,
                                     //resizeMode: "contain",
                                 },
                                 { resizeMode: "contain" },
@@ -100,7 +125,6 @@ export default function MetricComparisonBox({
                         />
                     </View>
                 </View>
-
                 <View
                     className="MetricBoxBottom"
                     style={{
@@ -108,9 +132,20 @@ export default function MetricComparisonBox({
                         width: "100%",
                         display: "flex",
                         flexDirection: "row",
+                        justifyContent: "space-between",
                         alignItems: "flex-end",
                     }}
                 >
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            fontWeight: "regular",
+                            textAlign: "left",
+                        }}
+                    >
+                        <Text style={styles.number}>17/21</Text>
+                        <Text style={styles.unit}>weekly goals</Text>
+                    </Text>
                     <View
                         style={{
                             display: "flex",
@@ -119,10 +154,12 @@ export default function MetricComparisonBox({
                         }}
                     >
                         <Image
-                            source={comparisonChartMini}
+                            source={sproutyChartMini}
                             style={[
                                 {
-                                    width: 263,
+                                    width: 118,
+                                    marginBottom: 4,
+
                                     //resizeMode: "contain",
                                 },
                                 { resizeMode: "contain" },
@@ -134,3 +171,17 @@ export default function MetricComparisonBox({
         </TouchableHighlight>
     );
 }
+
+const styles = StyleSheet.create({
+    number: {
+        fontSize: 30,
+        color: "#4D4D4D",
+    },
+    unit: {
+        fontSize: 16,
+        color: "#7B7B7B",
+        fontWeight: 400,
+        marginLeft: 2,
+        marginRight: 3,
+    },
+});

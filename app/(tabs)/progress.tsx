@@ -34,6 +34,13 @@ export default function Progress() {
                 </Text>
             </View>
 
+            <MetricComparisonBox
+                comparisonsName="Sprouty"
+                navigateTo="/sproutyView"
+                bgColor="#F8F8EF"
+                activityColor="#D7C115"
+            />
+
             <Text
                 style={{
                     width: "100%",
@@ -42,6 +49,7 @@ export default function Progress() {
                     fontWeight: "600",
                     color: "#4D4D4D",
                     marginBottom: 14,
+                    marginTop: 48,
                 }}
             >
                 Weekly Average
@@ -57,38 +65,23 @@ export default function Progress() {
                     gap: 22,
                 }}
             >
-                <MetricSummaryBox activityName="Steps" />
+                <MetricSummaryBox
+                    activityName="Steps"
+                    navigateTo="/stepsView"
+                />
                 <MetricSummaryBox
                     activityName="Sleep"
                     bgColor="#E1EEF7"
                     activityColor="#0065B1"
+                    navigateTo="/sleepView"
                 />
                 <MetricSummaryBox
                     activityName="Screen Time"
                     bgColor="#F0E4F8"
                     activityColor="#7000B1"
+                    navigateTo="/screenTimeView"
                 />
             </View>
-
-            <Text
-                style={{
-                    width: "100%",
-                    fontSize: 20,
-                    textAlign: "left",
-                    fontWeight: "600",
-                    color: "#4D4D4D",
-                    marginTop: 48,
-                    marginBottom: 14,
-                }}
-            >
-                Outcome Comparison
-            </Text>
-
-            <MetricComparisonBox
-                comparisonsName="Sleep & Steps & Screen Time..."
-                bgColor="#F8F8EF"
-                activityColor="#9A900E"
-            />
         </ScrollView>
     );
 }

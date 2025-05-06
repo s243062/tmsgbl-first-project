@@ -18,12 +18,24 @@ export default function TodaysStats({
         2
     )}%` as string;
 
+    // Define a mapping of activity names to their current and goal values
+    const activityValues: Record<
+        TodaysStatsProps["activityName"],
+        { currentValue: string; goalValue: string }
+    > = {
+        Steps: { currentValue: "2 200", goalValue: "10 000" },
+        Sleep: { currentValue: "7h 30 min", goalValue: "8h" },
+        "Screen Time": { currentValue: "2h 30 min", goalValue: "3h" },
+    };
+
+    // Get the current and goal values for the given activityName
+    const { currentValue, goalValue } = activityValues[activityName];
     return (
         <View
             style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 4,
+                gap: 2,
                 width: "100%",
             }}
         >
@@ -43,8 +55,9 @@ export default function TodaysStats({
                     paddingHorizontal: 4,
                     borderRadius: 36,
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-start",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                 }}
             >
                 <View
@@ -58,10 +71,20 @@ export default function TodaysStats({
                         justifyContent: "center",
                     }}
                 >
-                    <Text style={{ fontStyle: "italic", fontSize: 14 }}>
-                        Progress bar placeholder...
+                    <Text style={{ fontWeight: "semibold", fontSize: 14 }}>
+                        {currentValue}
                     </Text>
                 </View>
+                <Text
+                    style={{
+                        fontWeight: "semibold",
+                        fontSize: 14,
+                        paddingRight: 12,
+                        color: "#7B7B7B",
+                    }}
+                >
+                    {goalValue}
+                </Text>
             </View>
         </View>
     );

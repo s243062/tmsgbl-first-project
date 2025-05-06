@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
     Image,
@@ -29,17 +30,33 @@ const activityIcons: Record<string, ActivityIcons> = {
     },
 };
 
+type ValidRoute =
+    | "/stepsView"
+    | "/sleepView"
+    | "/screenTimeView"
+    | "/sproutyView";
 interface MetricSummaryBoxProps {
     bgColor?: string;
     activityColor?: string;
     activityName: string;
+    navigateTo?: ValidRoute;
 }
 
 export default function MetricSummaryBox({
     bgColor = "#E3F4EE",
     activityColor = "#16A150",
     activityName,
+    navigateTo,
 }: MetricSummaryBoxProps) {
+    const router = useRouter();
+
+    const handlePress = () => {
+        if (navigateTo) {
+            // This works now because `navigateTo` is typed as `ValidRoute`
+            router.push(navigateTo); // Expo Router will now accept this type safely
+        }
+    };
+
     const rightArrowIcon = require("../assets/images/arrowRightIcon.png");
 
     const iconKey =
@@ -82,6 +99,8 @@ export default function MetricSummaryBox({
 
     return (
         <TouchableHighlight
+            underlayColor="#ddd"
+            onPress={handlePress}
             style={{
                 width: "100%",
                 //flex: 2,
