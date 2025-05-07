@@ -216,8 +216,10 @@ export default function SproutyHome() {
                 style={{
                     width: "100%",
                     position: "relative",
+                    display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
+                    justifyContent: "center",
                     marginBottom: 40,
                     paddingTop: 60,
                     paddingHorizontal: 32,
@@ -321,13 +323,13 @@ export default function SproutyHome() {
             <View
                 className="todayStatsContainer"
                 style={{
-                    marginTop: 15,
+                    marginTop: 10,
                     display: "flex",
                     flexDirection: "column",
                     width: "100%",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: 8,
+                    gap: 6,
                     paddingHorizontal: 32,
                 }}
             >
@@ -335,6 +337,7 @@ export default function SproutyHome() {
                     style={{
                         display: "flex",
                         alignItems: "center",
+                        marginBottom: -4,
                     }}
                 >
                     <Text
@@ -347,7 +350,7 @@ export default function SproutyHome() {
                             color: "#4D4D4D",
                         }}
                     >
-                        STATS TODAY:
+                        STATS TODAY
                     </Text>
                 </View>
                 <TodaysStats
