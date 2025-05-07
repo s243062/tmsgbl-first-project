@@ -8,7 +8,7 @@ export default function AppLayout() {
                 headerShown: false, // Hide the header globally
                 tabBarShowLabel: false, // Hide text labels under icons
                 tabBarStyle: {
-                    height: 80, // Increase the height of the tab bar
+                    height: 70, // Increase the height of the tab bar
                     backgroundColor: "#ffffff", // Customize the background color
                     borderTopColor: "#C2C2C2", // Add a top border
                     borderTopWidth: 1.5, // Add a top border width
@@ -24,8 +24,8 @@ export default function AppLayout() {
                         <Image
                             source={require("@/assets/images/bottomMenu/progressMenu.png")}
                             style={{
-                                width: 50,
-                                height: 29,
+                                width: 45,
+                                height: 26,
                             }}
                         />
                     ),
@@ -41,8 +41,8 @@ export default function AppLayout() {
                         <Image
                             source={require("@/assets/images/bottomMenu/sproutyMenu.png")}
                             style={{
-                                width: 64,
-                                height: 50,
+                                width: 58,
+                                height: 45,
                             }}
                         />
                     ),
@@ -57,8 +57,8 @@ export default function AppLayout() {
                         <Image
                             source={require("@/assets/images/bottomMenu/gardenerMenu.png")}
                             style={{
-                                width: 50,
-                                height: 44,
+                                width: 45,
+                                height: 39,
                             }}
                         />
                     ),
