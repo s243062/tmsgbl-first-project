@@ -221,14 +221,13 @@ export default function SproutyHome() {
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: 40,
-                    paddingTop: 60,
+                    paddingTop: 20,
                     paddingHorizontal: 32,
                 }}
             >
                 <View
                     style={{
                         width: "100%",
-                        position: "absolute",
                         left: 0,
                         right: 0,
                         display: "flex",
@@ -248,7 +247,6 @@ export default function SproutyHome() {
 
                 <View
                     style={{
-                        marginLeft: "auto",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",

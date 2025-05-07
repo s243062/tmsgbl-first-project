@@ -36,23 +36,19 @@ export default function ScreenTimeView() {
             >
                 {/* Weekly Report Component */}
                 <View style={[styles.reportCard, { width: screenWidth - 24 }]}>
-                    <Text style={styles.reportTitle}>Weekly Report</Text>
-
+                    <Text style={styles.reportTitle}>Weekly Trend</Text>
 
                     <Text style={styles.previousAverageText}>
-                        Previous Week's Average: 1 hr 12 min
+                        On average this week you spent <Text style={{fontWeight: 'bold'}}>20 minutes less</Text> on your screen than the previous week
                     </Text>
 
                     <View style={styles.percentChangeContainer}>
-                        <Text style={styles.percentChangeText}>
-                           Current Week: 
-                        </Text>
                         <Image
                             source={require("@/assets/images/GreenDownArrow.png")}
                             style={styles.arrowIcon}
                         />
                         <Text style={styles.percentChangeText}>
-                            25.0% less than previous week
+                            which is <Text style={{fontWeight: 'bold'}}>25.0% less</Text> compared to the previous week
                         </Text>
                     </View>
                 </View>
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#f8f8f8",
-        paddingTop: 40,
+        //paddingTop: 40,
     },
     scrollContainer: {
         alignItems: "center",
@@ -143,12 +139,12 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 20,
+        paddingTop: 10,
         paddingBottom: 20,
         paddingHorizontal: 20,
     },
     backButton: {
-        marginTop: 30,
+        marginTop: 10,
         padding: 5,
         position: "absolute",
         left: 20,

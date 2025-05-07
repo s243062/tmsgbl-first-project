@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#f8f8f8",
-        paddingTop: 40,
+        //paddingTop: 40,
     },
     scrollContainer: {
         alignItems: "center",
@@ -239,12 +239,12 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 20,
+        paddingTop: 10,
         paddingBottom: 20,
         paddingHorizontal: 20,
     },
     backButton: {
-        marginTop: 30,
+        marginTop: 10,
         padding: 5,
         position: "absolute",
         left: 20,

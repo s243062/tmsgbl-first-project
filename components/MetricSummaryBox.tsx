@@ -64,9 +64,9 @@ export default function MetricSummaryBox({
         activityName.slice(1).replace(/\s+/g, ""); // "steps", "screenTime", etc.
 
     const [weeklyAverage, setWeeklyAverage] = useState([
-        { activity: "Steps", count: "6340" },
-        { activity: "Sleep", count: "7 20" },
-        { activity: "Screen Time", count: "4 20" },
+        { activity: "Steps", count: "5691" },
+        { activity: "Sleep", count: "7 12" },
+        { activity: "Screen Time", count: "0 53" },
     ]);
 
     const activityData = weeklyAverage.find(

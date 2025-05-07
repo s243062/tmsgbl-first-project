@@ -29,16 +29,15 @@ export default function StepsView() {
         {/* Weekly Report Component */}
         <View style={[styles.reportCard, { width: screenWidth - 24 }]}>
           <Text style={styles.reportTitle}>Weekly Trend</Text>
-          
-          <Text style={styles.previousAverageText}>Previous Week's Average: 7,113</Text>
-          
+          <Text style={styles.previousAverageText}>
+            On average this week you walked <Text style={{fontWeight: 'bold'}}>1300 steps less</Text> than the previous week
+          </Text>
           <View style={styles.percentChangeContainer}>
-          <Text style={styles.percentChangeText}>Current Week: </Text>
             <Image 
               source={require('@/assets/images/RedDownArrow.png')} 
               style={styles.arrowIcon} 
             />
-            <Text style={styles.percentChangeText}>25.0% less than previous week</Text>
+            <Text style={styles.percentChangeText}>which is <Text style={{fontWeight: 'bold'}}>25% less</Text> compared to the previous week</Text>
           </View>
         </View>
 
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f8f8',
-    paddingTop: 40,
+    paddingTop: 0,
   },
   scrollContainer: {
     alignItems: 'center',
@@ -127,12 +126,12 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 20,
     paddingHorizontal: 20,
   },
   backButton: {
-    marginTop: 30,
+    marginTop: 10,
     padding: 5,
     position: 'absolute',
     left: 20,

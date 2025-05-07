@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     refreshedText: {
         textAlign: "center",
-        marginTop: 70,
+        marginTop: 20,
         fontSize: 14,
         color: "#4D4D4D",
     },

@@ -16,7 +16,7 @@ export default function Progress() {
             <View
                 className="ProgressTabTitle"
                 style={{
-                    paddingTop: 50,
+                    paddingTop: 20,
                     display: "flex",
                     width: "100%",
                     justifyContent: "flex-start",
