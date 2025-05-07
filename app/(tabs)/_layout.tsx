@@ -11,7 +11,7 @@ export default function AppLayout() {
                     height: 70, // Increase the height of the tab bar
                     backgroundColor: "#ffffff", // Customize the background color
                     borderTopColor: "#C2C2C2", // Add a top border
-                    borderTopWidth: 1.5, // Add a top border width
+                    borderTopWidth: 1, // Add a top border width
                     paddingTop: 20,
                 },
             }}
