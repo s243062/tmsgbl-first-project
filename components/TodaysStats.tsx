@@ -23,7 +23,7 @@ export default function TodaysStats({
         TodaysStatsProps["activityName"],
         { currentValue: string; goalValue: string }
     > = {
-        Steps: { currentValue: "2 200", goalValue: "10 000" },
+        Steps: { currentValue: "6 370", goalValue: "10 000" },
         Sleep: { currentValue: "7h 30 min", goalValue: "8h" },
         "Screen Time": { currentValue: "2h 30 min", goalValue: "3h" },
     };
